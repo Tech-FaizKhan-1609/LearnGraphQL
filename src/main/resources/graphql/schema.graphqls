@@ -1,0 +1,52 @@
+type Product{
+   id:ID,
+   name:String,
+   category:String,
+   price:Float,
+   stock:Int
+}
+  
+type User{
+    userId:ID!
+    name:String
+    email:String
+    phone:String
+    password:String
+    orders:[Order]
+}
+
+type Order{
+    orderId:ID!
+    orderDetails:String
+    address:String
+    price:Int
+    user:User
+    
+}
+
+type Query{
+   getAllProducts:[Product]
+   getProductByCategory(category:String):[Product]
+   getUserById(id:ID!):User
+   getAllUsers:[User]
+}
+
+type Mutation{
+  updateStock(id:ID!,stock:Int):Product
+  updateStockShipment(id:ID!,stock:Int):Product
+  
+  createUser(name:String, email:String, phone:String, password:String):User
+  createUserByObject(userDTO:UserDTO):User
+  
+  updateUser(userDTO:UserDTO, id:ID!):User
+  deleteUser(id:ID!):String
+  
+}
+
+
+input UserDTO{
+   name:String
+   email:String
+   phone:String
+   password:String
+}
